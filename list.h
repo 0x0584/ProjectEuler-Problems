@@ -20,6 +20,10 @@ typedef struct LIST {
 } list_t;
 
 /* ------------- prototypes ------------- */
+
+node_t *new_node(int value, node_t * prev, node_t * next);
+void free_node(node_t * node);
+
 list_t *new_list(void);
 void free_list(list_t * list);
 void output_list(FILE * stream, list_t * list);

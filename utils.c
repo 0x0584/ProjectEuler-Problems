@@ -8,6 +8,21 @@
 
 #include "utils.h"
 
+node_t *new_node(int value, node_t * prev, node_t * next) {
+    node_t *new = malloc(sizeof *new);
+
+    new->value = value;
+    new->prev = prev;
+    new->next = next;
+
+    return new;
+}
+
+void free_node(node_t * node) {
+    free(node);
+}
+
+
 /**
  * creates a new list
  *
@@ -16,20 +31,13 @@
  */
 list_t *new_list(void) {
     list_t *foo;
-    node_t *head, *tail;
+    node_t *head = new_node(JUNK_DATA, NULL, NULL);
+    node_t *tail = new_node(JUNK_DATA, NULL, NULL);
 
-    head = malloc(sizeof *head);
-    tail = malloc(sizeof *tail);
-    foo = malloc(sizeof *foo);
-
-    head->prev = NULL;
-    head->value = -1;
     head->next = tail;
-
     tail->prev = head;
-    tail->value = -1;
-    tail->next = NULL;
 
+    foo = malloc(sizeof *foo);
     foo->head = head;
     foo->tail = tail;
 
@@ -158,10 +166,7 @@ node_t *pusha(node_t * node, int value) {
 	return pushb(node, value);	/* this is the tail */
     }
 
-    new = malloc(sizeof *new);
-    new->value = value;
-    new->prev = node;
-    new->next = node->next;
+    new = new_node(value, node ,node->next);
 
     tmp = node->next;
     node->next = new;
@@ -185,10 +190,7 @@ node_t *pushb(node_t * node, int value) {
 	return pusha(node, value);	/* this is the head */
     }
 
-    new = malloc(sizeof *new);
-    new->value = value;
-    new->prev = node->prev;
-    new->next = node;
+    new = new_node(value, node->prev,node);
 
     tmp = node->prev;
     node->prev = new;
@@ -197,9 +199,45 @@ node_t *pushb(node_t * node, int value) {
     return new;
 }
 
-int pop(list_t * list);
-int popa(node_t * node);
-int popb(node_t * node);
+
+int pop(list_t * list) {
+    return popa(list->head);
+}
+
+int popa(node_t * node) {
+    int data;
+    node_t *tmp;
+
+    if (!(tmp = node->next)) {
+	return JUNK_DATA;
+    }
+
+    data = tmp->value;
+    node->next = tmp->next;
+    tmp->next->prev = node;
+
+    free_node(tmp);
+
+    return data;
+}
+
+int popb(node_t * node) {
+    int data;
+    node_t *tmp;
+
+    if (!(tmp = node->prev)) {
+	return JUNK_DATA;
+    }
+
+    data = tmp->value;
+    node->prev = tmp->prev;
+    tmp->prev->next = node;
+
+    free_node(tmp);
+
+    return data;
+}
+
 node_t *find(list_t * list, int value);
 node_t *findfar(list_t * list, int value);
 
@@ -223,7 +261,12 @@ int main() {
     pushb(foo->head, 1);
     output_list(stdout, foo);
 
-    printf("-> %d\n", length_list(foo));
+    int tmp = pop(foo);
+    printf("[%d] -> %d\n", tmp, length_list(foo));
+    tmp = pop(foo);
+    printf("[%d] -> %d\n", tmp, length_list(foo));
+    tmp = pop(foo);
+    printf("[%d] -> %d\n", tmp, length_list(foo));
 
     free_list(foo);
 }
