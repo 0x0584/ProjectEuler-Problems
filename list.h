@@ -15,19 +15,20 @@ typedef struct NODE {
  * List	data structure, is a sequence of `nodes`
  * */
 typedef struct LIST {
-    size_t size;		/* size of the list */
     struct NODE *head,		/* the very first node in the list */
        *tail;			/* the very last node in the list */
 } list_t;
 
 /* ------------- prototypes ------------- */
-list_t *init_list(void);
+list_t *new_list(void);
 void free_list(list_t * list);
-void print_list(list_t * list);
+void output_list(FILE * stream, list_t * list);
 bool_t isempty_list(list_t * list);
-void push(list_t * list, int value);
-void pusha(node_t * node, int value);
-void pushb(node_t * node, int value);
+/* TODO: find another way to get the length, this is silly and no efficant */
+int length_list(list_t * list);
+node_t *push(list_t * list, int value);
+node_t *pusha(node_t * node, int value);
+node_t *pushb(node_t * node, int value);
 int pop(list_t * list);
 int popa(node_t * node);
 int popb(node_t * node);

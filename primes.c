@@ -15,8 +15,8 @@
  * @return true if the n is prime
  */
 bool_t isprime(long n) {
-    long i, limit = sqrt(n);	/* if !logical to keep looking
-				 * after sqrt(n) */
+    long i, limit = n/2;	/* if !logical to keep looking
+				 * after n/2 */
 
     for (i = 2; i < limit; ++i) {
 	unless (n%i) {		/* if n is divisible by i */
