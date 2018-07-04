@@ -6,7 +6,7 @@
  * MODIFIED:	06/15/2018
  */
 
-#include "utils.h"
+#include "../include/utils.h"
 
 node_t *new_node(int value, node_t * prev, node_t * next) {
     node_t *new = malloc(sizeof *new);
@@ -166,7 +166,7 @@ node_t *pusha(node_t * node, int value) {
 	return pushb(node, value);	/* this is the tail */
     }
 
-    new = new_node(value, node ,node->next);
+    new = new_node(value, node, node->next);
 
     tmp = node->next;
     node->next = new;
@@ -190,7 +190,7 @@ node_t *pushb(node_t * node, int value) {
 	return pusha(node, value);	/* this is the head */
     }
 
-    new = new_node(value, node->prev,node);
+    new = new_node(value, node->prev, node);
 
     tmp = node->prev;
     node->prev = new;
@@ -238,8 +238,30 @@ int popb(node_t * node) {
     return data;
 }
 
-node_t *find(list_t * list, int value);
-node_t *findfar(list_t * list, int value);
+node_t *find(list_t * list, int value, bool_t ishead) {
+    node_t *tmp = NULL, *target = NULL;
+    tmp = ishead ? list->head->next : list->tail->prev;
+
+    while (tmp) {
+	if (tmp->value == value) {
+	    target = tmp;
+	    break;
+	} else {
+	    tmp = ishead ? tmp->next : tmp->prev;
+	}
+    }
+
+    /* for-version */
+    /*
+       for (; tmp;
+	    tmp = ishead ? tmp->next : tmp->prev) {
+       if (tmp->value == value) {
+       return tmp;
+       }
+       }
+     */
+    return target;
+}
 
 array_t *init_array(void);
 void free_array(array_t * array);
@@ -247,26 +269,41 @@ void free_array(array_t * array);
 list_t *tolist(array_t * array);
 array_t *toarray(list_t * list);
 
-int main() {
-    list_t *foo = new_list();
-
-    output_list(stdout, foo);
+void testing_list(list_t *foo, FILE *stream) {
+    output_list(stream, foo);
 
     push(foo, 5);
-    output_list(stdout, foo);
+    output_list(stream, foo);
 
     pusha(foo->tail, 2);
-    output_list(stdout, foo);
+    output_list(stream, foo);
 
     pushb(foo->head, 1);
-    output_list(stdout, foo);
+    output_list(stream, foo);
+    bool_t ishead = true;
+    int value = 2;
+    node_t *tmp0 = find(foo, value, ishead);
+    if(tmp0) {
+	fprintf(stream, "find (%s) [%d]\n",
+		ishead ? "after" : "before",
+		tmp0->value);
+    } else {
+	fprintf(stream, "%d not found\n", value);
+    }
 
     int tmp = pop(foo);
-    printf("[%d] -> %d\n", tmp, length_list(foo));
+    fprintf(stream, "[%d] len %d\n", tmp, length_list(foo));
     tmp = pop(foo);
-    printf("[%d] -> %d\n", tmp, length_list(foo));
+    fprintf(stream, "[%d] len %d\n", tmp, length_list(foo));
     tmp = pop(foo);
-    printf("[%d] -> %d\n", tmp, length_list(foo));
+    fprintf(stream, "[%d] len %d\n", tmp, length_list(foo));
 
     free_list(foo);
+}
+
+list_t *random_list(int limit);
+
+int main() {
+    testing_list(new_list(), stdout);
+    /* output_list(stdout, random_list(0)); */
 }

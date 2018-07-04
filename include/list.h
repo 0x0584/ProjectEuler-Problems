@@ -28,7 +28,8 @@ list_t *new_list(void);
 void free_list(list_t * list);
 void output_list(FILE * stream, list_t * list);
 bool_t isempty_list(list_t * list);
-/* TODO: find another way to get the length, this is silly and no efficant */
+/* TODO: find another way to get the length,
+ * this is silly and no efficant */
 int length_list(list_t * list);
 node_t *push(list_t * list, int value);
 node_t *pusha(node_t * node, int value);
@@ -36,7 +37,7 @@ node_t *pushb(node_t * node, int value);
 int pop(list_t * list);
 int popa(node_t * node);
 int popb(node_t * node);
-node_t *find(list_t * list, int value);
-node_t *findfar(list_t * list, int value);
-
+node_t *find(list_t * list, int value, bool_t ishead);
+void testing_list(list_t *list, FILE* stream);
+list_t *random_list(int limit);
 #endif

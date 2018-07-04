@@ -1,0 +1,48 @@
+
+array.h,125
+#  define __ARRAY_H2,18
+typedef struct ARRAY 8,128
+    int *values;values9,151
+    size_t size;10,192
+} array_t;11,238
+
+utils.h,25
+#  define __UTILS_H2,18
+
+primes.c,23
+bool_t isprime(17,274
+
+foo.c,15
+int main(3,20
+
+list.h,256
+#  define __LIST_H2,17
+typedef struct NODE 8,127
+    int value;9,149
+    struct NODE *prev,prev10,192
+       *next;next11,254
+} node_t;12,312
+typedef struct LIST 17,382
+    struct NODE *head,head18,404
+       *tail;tail19,466
+} list_t;20,519
+
+utils.c,282
+list_t *new_list(new_list17,256
+list_t *init_list(init_list46,841
+void free_list(63,1165
+bool_t isempty_list(85,1662
+int length_list(97,1990
+void output_list(116,2364
+node_t *push(push141,2897
+node_t *pusha(pusha152,3202
+node_t *pushb(pushb175,3726
+int main(204,4312
+
+general.h,131
+#  define __GENERAL_H2,20
+#  define unless(3,42
+typedef enum BOOLEAN 10,154
+    false 11,177
+    true 12,199
+} bool_t;13,217
