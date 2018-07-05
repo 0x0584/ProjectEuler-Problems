@@ -13,5 +13,5 @@ typedef struct ARRAY {
 /* ------------- prototypes ------------- */
 array_t *new_array(size_t size);
 void free_array(array_t * array);
-
+void output_array(FILE * stream, array_t * arr);
 #endif
