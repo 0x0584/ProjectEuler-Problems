@@ -1,45 +1,60 @@
 
-array.h,125
+src/utils.c,905
+node_t *new_node(new_node11,147
+void free_node(21,341
+list_t *new_list(new_list31,519
+list_t *init_list(init_list53,1025
+void free_list(70,1349
+bool_t isempty_list(92,1846
+size_t length_list(105,2175
+void output_list(124,2554
+node_t *push(push152,3205
+node_t *pusha(pusha164,3557
+node_t *pushb(pushb188,4107
+long long pop(205,4392
+long long popa(209,4455
+long long popb(226,4703
+node_t *find(find243,4951
+array_t *new_array(new_array268,5446
+void free_array(277,5617
+list_t *tolist(tolist282,5697
+array_t *toarray(toarray293,5871
+void output_array(306,6130
+void testing_array(314,6300
+void testing_list(337,6750
+list_t *random_list(random_list379,7650
+bool_t isprime(395,7900
+list_t *getprimes(getprimes407,8057
+long long **decompose(decompose420,8237
+    enum { PRIME 424,8449
+    enum { PRIME = 0, POWER 424,8449
+void testing_primes(444,8821
+int main(478,9658
+
+include/array.h,131
 #  define __ARRAY_H2,18
 typedef struct ARRAY 8,128
-    int *values;values9,151
-    size_t size;10,192
-} array_t;11,238
+    long long *values;values9,151
+    size_t size;10,198
+} array_t;11,244
 
-utils.h,25
+include/utils.h,51
 #  define __UTILS_H2,18
+#  define JUNK_DATA 3,38
 
-primes.c,23
-bool_t isprime(17,274
-
-foo.c,15
-int main(3,20
-
-list.h,256
+include/list.h,262
 #  define __LIST_H2,17
 typedef struct NODE 8,127
-    int value;9,149
-    struct NODE *prev,prev10,192
-       *next;next11,254
-} node_t;12,312
-typedef struct LIST 17,382
-    struct NODE *head,head18,404
-       *tail;tail19,466
-} list_t;20,519
+    long long value;9,149
+    struct NODE *prev,prev10,197
+       *next;next11,259
+} node_t;12,317
+typedef struct LIST 17,387
+    struct NODE *head,head18,409
+       *tail;tail19,471
+} list_t;20,524
 
-utils.c,282
-list_t *new_list(new_list17,256
-list_t *init_list(init_list46,841
-void free_list(63,1165
-bool_t isempty_list(85,1662
-int length_list(97,1990
-void output_list(116,2364
-node_t *push(push141,2897
-node_t *pusha(pusha152,3202
-node_t *pushb(pushb175,3726
-int main(204,4312
-
-general.h,131
+include/general.h,131
 #  define __GENERAL_H2,20
 #  define unless(3,42
 typedef enum BOOLEAN 10,154

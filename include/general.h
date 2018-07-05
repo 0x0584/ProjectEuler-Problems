@@ -11,5 +11,4 @@ typedef enum BOOLEAN {
     false = (1 == 0),
     true = !false
 } bool_t;
-
 #endif

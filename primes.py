@@ -27,6 +27,7 @@ def valu(n):
         l += [[i, 0]]
     return l
 
+print valu(100)
 
 def dec(n):
     t = valu(n)
@@ -37,3 +38,5 @@ def dec(n):
             t[i][1] += 1
             j *= s[i]
     return t
+
+print dec(100)

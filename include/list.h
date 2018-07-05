@@ -6,7 +6,7 @@
  * Node, is a particular piece inside a `list_t` element
  * */
 typedef struct NODE {
-    int value;			/* content of the node */
+    long long value;		/* content of the node */
     struct NODE *prev,		/* the that comes before this node */
        *next;			/* the node that comes after this node */
 } node_t;
@@ -21,7 +21,7 @@ typedef struct LIST {
 
 /* ------------- prototypes ------------- */
 
-node_t *new_node(int value, node_t * prev, node_t * next);
+node_t *new_node(long long value, node_t * prev, node_t * next);
 void free_node(node_t * node);
 
 list_t *new_list(void);
@@ -30,14 +30,14 @@ void output_list(FILE * stream, list_t * list);
 bool_t isempty_list(list_t * list);
 /* TODO: find another way to get the length,
  * this is silly and no efficant */
-int length_list(list_t * list);
-node_t *push(list_t * list, int value);
-node_t *pusha(node_t * node, int value);
-node_t *pushb(node_t * node, int value);
-int pop(list_t * list);
-int popa(node_t * node);
-int popb(node_t * node);
-node_t *find(list_t * list, int value, bool_t ishead);
-void testing_list(list_t *list, FILE* stream);
-list_t *random_list(int limit);
+size_t length_list(list_t * list);
+node_t *push(list_t * list,  long long value);
+node_t *pusha(node_t * node, long long value);
+node_t *pushb(node_t * node, long long value);
+long long pop(list_t * list);
+long long popa(node_t * node);
+long long popb(node_t * node);
+node_t *find(list_t * list, long long value, bool_t ishead);
+void testing_list(list_t * list, FILE * stream);
+list_t *random_list(size_t limit);
 #endif

@@ -6,12 +6,12 @@
  * Array data structure, basically for storing integers
  * */
 typedef struct ARRAY {
-    int *values;		/* the actual array */
+    long long *values;		/* the actual array */
     size_t size;		/* the size of the array */
 } array_t;
 
 /* ------------- prototypes ------------- */
-array_t *init_array(void);
+array_t *new_array(size_t size);
 void free_array(array_t * array);
 
 #endif
