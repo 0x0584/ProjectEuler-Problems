@@ -1,35 +1,40 @@
 
-src/utils.c,905
-node_t *new_node(new_node11,147
-void free_node(21,341
-list_t *new_list(new_list31,519
-list_t *init_list(init_list53,1025
-void free_list(70,1349
-bool_t isempty_list(92,1846
-size_t length_list(105,2175
-void output_list(124,2554
-node_t *push(push152,3205
-node_t *pusha(pusha164,3557
-node_t *pushb(pushb188,4107
-long long pop(205,4392
-long long popa(209,4455
-long long popb(226,4703
-node_t *find(find243,4951
-array_t *new_array(new_array268,5446
-void free_array(277,5617
-list_t *tolist(tolist282,5697
-array_t *toarray(toarray293,5871
-void output_array(306,6130
-void testing_array(314,6300
-void testing_list(337,6750
-list_t *random_list(random_list379,7650
-bool_t isprime(395,7900
-list_t *getprimes(getprimes407,8057
-long long **decompose(decompose420,8237
-    enum { PRIME 424,8449
-    enum { PRIME = 0, POWER 424,8449
-void testing_primes(444,8821
-int main(478,9658
+src/list.c,465
+node_t *new_node(new_node3,31
+void free_node(13,225
+list_t *new_list(new_list23,403
+list_t *init_list(init_list45,909
+void free_list(62,1233
+bool_t isempty_list(84,1730
+size_t length_list(97,2059
+void output_list(116,2438
+node_t *push(push144,3089
+node_t *pusha(pusha156,3441
+node_t *pushb(pushb180,3991
+long long pop(197,4276
+long long popa(201,4339
+long long popb(218,4587
+node_t *find(find235,4835
+list_t *random_list(random_list260,5330
+
+src/utils.c,150
+array_t *new_array(new_array11,147
+void free_array(20,318
+list_t *tolist(tolist25,398
+array_t *toarray(toarray36,572
+void output_array(49,831
+
+src/prime.c,294
+list_t *getset(getset10,265
+int main(14,322
+bool_t isprime(33,707
+list_t *getprimes(getprimes45,864
+size_t **decompose(decompose58,1044
+    enum { PRIME 59,1095
+    enum { PRIME = 0, POWER 59,1095
+void testing_primes(102,2157
+void testing_list(145,3126
+void testing_array(182,3964
 
 include/array.h,131
 #  define __ARRAY_H2,18
@@ -38,9 +43,85 @@ typedef struct ARRAY 8,128
     size_t size;10,198
 } array_t;11,244
 
-include/utils.h,51
+include/utils.h,97
 #  define __UTILS_H2,18
 #  define JUNK_DATA 3,38
+#  define LIMIT 4,68
+#  define STREAM 5,143
+
+include/list.h,262
+#  define __LIST_H2,17
+typedef struct NODE 8,127
+    long long value;9,149
+    struct NODE *prev,prev10,197
+       *next;next11,259
+} node_t;12,317
+typedef struct LIST 17,387
+    struct NODE *head,head18,409
+       *tail;tail19,471
+} list_t;20,524
+
+include/general.h,131
+#  define __GENERAL_H2,20
+#  define unless(3,42
+typedef enum BOOLEAN 10,154
+    false 11,177
+    true 12,199
+} bool_t;13,217
+
+src/list.c,511
+node_t *new_node(new_node3,31
+void free_node(13,225
+list_t *new_list(new_list23,403
+list_t *init_list(init_list45,909
+void free_list(62,1233
+bool_t isempty_list(84,1730
+size_t length_list(97,2059
+void output_list(116,2438
+node_t *push(push144,3089
+node_t *pusha(pusha156,3441
+node_t *pushb(pushb180,3991
+long long pop(197,4276
+long long popa(201,4339
+long long popb(218,4587
+node_t *find(find235,4835
+list_t *random_list(random_list260,5330
+list_t *distinct_list(distinct_list276,5580
+
+src/array.c,154
+array_t *new_array(new_array11,147
+void free_array(20,318
+list_t *to_list(to_list25,398
+array_t *to_array(to_array36,573
+void output_array(49,833
+
+src/prime.c,377
+#define DEFAULT_N 3,31
+#define DEFAULT_M 4,51
+list_t *getset(getset15,308
+void testing_solution(20,403
+int main(37,802
+bool_t isprime(87,1987
+list_t *getprimes(getprimes99,2144
+size_t **decompose(decompose112,2324
+    enum { PRIME 113,2375
+    enum { PRIME = 0, POWER 113,2375
+void testing_primes(156,3440
+void testing_list(199,4409
+void testing_array(236,5247
+
+include/array.h,131
+#  define __ARRAY_H2,18
+typedef struct ARRAY 8,128
+    long long *values;values9,151
+    size_t size;10,198
+} array_t;11,244
+
+include/utils.h,97
+#  define __UTILS_H2,18
+#  define JUNK_DATA 3,38
+#  define LIMIT 4,68
+#  define STREAM 5,143
 
 include/list.h,262
 #  define __LIST_H2,17

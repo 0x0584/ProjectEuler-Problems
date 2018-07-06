@@ -40,4 +40,5 @@ long long popb(node_t * node);
 node_t *find(list_t * list, long long value, bool_t ishead);
 void testing_list(list_t * list, FILE * stream);
 list_t *random_list(size_t limit);
+list_t *distinct_list(list_t *list);
 #endif
