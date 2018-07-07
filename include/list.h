@@ -41,4 +41,6 @@ node_t *find(list_t * list, long long value, bool_t ishead);
 void testing_list(list_t * list, FILE * stream);
 list_t *random_list(size_t limit);
 list_t *distinct_list(list_t *list);
+bool_t isin_list(long long value, list_t * list);
+void push_unique(list_t *list, long long value);
 #endif

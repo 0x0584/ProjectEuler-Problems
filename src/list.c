@@ -273,6 +273,30 @@ list_t *random_list(size_t limit) {
     return tmp;
 }
 
-list_t *distinct_list(list_t *list) {
+list_t *distinct_list(list_t * list) {
+
     return list;
+}
+
+void push_unique(list_t *list, long long value) {
+    if (!isin_list(value, list)) {
+	push(list, value);
+    }
+}
+
+bool_t isin_list(long long value, list_t * list) {
+    node_t *tmp = list->head->next;
+
+    while (tmp->next) {
+	if (value == tmp->value) {
+	    goto RET;
+	} else {
+	    tmp = tmp->next;
+	}
+    }
+
+    return false;
+
+  RET:
+    return true;
 }

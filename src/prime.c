@@ -12,9 +12,53 @@ bool_t isprime(size_t number);
 list_t *getprimes(size_t limit);
 size_t **decompose(size_t number, size_t * size);
 
+size_t product(size_t * in, size_t size) {
+    size_t i = 0, PI = 1;
+
+    for (i = 0; i < size; ++i) {
+	PI *= in[i];
+    }
+
+    return PI;
+}
+
+size_t fact(size_t number) {
+    size_t i = number, result = 1;
+
+    while (i) {
+	result *= i--;
+    }
+
+    return result;
+}
+
+size_t binomial(size_t n, size_t k) {
+    return fact(n) / (fact(k) * (fact(n - k))) ;
+}
+
+/*
+ * this gives us a set of all possible products
+ * of n integers ranging from 1 to m
+ */
 list_t *getset(size_t m, size_t n) {
-    fprintf(STREAM, "\n%ld-%ld\n", m, n);
+    size_t *cross = malloc(n * sizeof *cross);
+    size_t i = 0, tmp = m, limit = binomial(m, n);
     list_t *new = new_list();
+
+    fprintf(STREAM, "\n%ld-%ld\n", m, n);
+
+    /* for all possible products */
+    for (i = 0; i < limit; tmp = m, ++i) {
+	/* over the numbers to product */
+	for (i = 0; i < n; ++i) {
+	    cross[i] = tmp--;
+	}
+
+	push_unique(new, product(cross, n));
+    }
+
+    free(cross);
+
     return new;
 }
 
@@ -28,8 +72,10 @@ void testing_solution(size_t * input, size_t size) {
     for (i = 0; i < bar; ++i) {
 	list_t *S = getset((m = input[i]),
 			   (n = input[bar + i]));
-	/* output_list(STREAM, solution); */
-	/* fprintf(STREAM, "F(%lu, %lu) = %lu", m, n, length_list(solution)); */
+	distinct_list(S);
+	output_list(STREAM, S);
+
+	fprintf(STREAM, "F(%lu, %lu) = %lu", m, n, length_list(S));
 
 	free_list(S);
 	puts("%");
@@ -47,7 +93,7 @@ int main(int argc, char **argv) {
 
     /* ----------- handling arguments ----------- */
     if (isvalid) {
-	bar = iseven ? (argc) / 2: (argc - 1) / 2;
+	bar = iseven ? (argc) / 2 : (argc - 1) / 2;
 	if (!iseven) {
 	    fputs("WARN:numbers should be sent as paires\n", stream);
 	}
@@ -62,8 +108,8 @@ int main(int argc, char **argv) {
 
     if (isvalid) {
 	for (i = 0; i < bar; i++) {
-	    input[i] = atoi(argv[i*2 + 1]);
-	    input[bar + i] = atoi(argv[i*2 + 2]);
+	    input[i] = atoi(argv[i * 2 + 1]);
+	    input[bar + i] = atoi(argv[i * 2 + 2]);
 	}
 	puts("%");
     } else {

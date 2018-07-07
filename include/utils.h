@@ -7,7 +7,7 @@
 #  include "array.h"
 #  include <limits.h>
 #  include <time.h>
-
+#  include <math.h>
 list_t *init_list(array_t * array);
 list_t *to_list(array_t * array);
 array_t *to_array(list_t * list);
